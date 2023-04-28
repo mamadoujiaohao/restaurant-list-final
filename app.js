@@ -88,6 +88,16 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
+//delete function
+app.post('/restaurants/:id/delete', (req,res) => {
+  const id = req.params.id
+  return Restaurants.findById(id)
+    .then(restaurant => {
+      restaurant.deleteOne()})
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
+
 //search function
 app.get('/search', (req, res) => {
     const keyword = req.query.keyword
