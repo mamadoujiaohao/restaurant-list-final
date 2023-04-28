@@ -47,20 +47,18 @@ app.get('/restaurants/:id', (req, res) => {
 
 //search function
 app.get('/search', (req, res) => {
+    const keyword = req.query.keyword
+    const keywords = keyword.trim().toLowerCase()
     Restaurants.find({})
       .lean()
       .then((restaurantList)=>{
-        const keyword = req.query.keyword.trim().toLowerCase()
-        const restaurants = restaurantList.filter(restaurant => {
-        restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword.toLowerCase())
+        console.log(keywords)
+        const restaurants = restaurantList.filter(data => {
+        return data.name.toLowerCase().includes(keywords) //|| data.category.includes(keyword)
         })
-        res.render('index', { restaurants: restaurants, keyword: keyword })
+        res.render('index', { restaurant: restaurants, keyword: keyword })
       })
       .catch(error => console.error(error))
-    // const restaurants = restaurantList.results.filter(restaurant => {
-    //   return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-    // })
-    //res.render('index', { restaurants: restaurants, keyword: keyword })
 })
   
 
