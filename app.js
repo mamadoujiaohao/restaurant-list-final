@@ -18,14 +18,15 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 // setting template engine
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({defaultLayout: 'main'}))
+app.set('view engine', 'hbs')
 
 //define server related variables
 const port = process.env.PORT
 
 // setting static files
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended:true }))
 
 //handle request and response here
 //index page
@@ -36,7 +37,20 @@ app.get('/', (req, res) => {
       .catch(error => console.error(error))
 })
 
-//show pages
+
+//new page(should be upper)
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  const {name,name_en,category,image,location,phone,google_map,rating,description} = req.body
+   Restaurants.create({name,name_en,category,image,location,phone,google_map,rating,description})
+  .then(() => {res.redirect('/')})
+  .catch(error => console.error(error))
+})
+
+//show pages(should be lower)
 app.get('/restaurants/:id', (req, res) => {
     const id = req.params.id
     return Restaurants.findById(id)
@@ -52,7 +66,6 @@ app.get('/search', (req, res) => {
     Restaurants.find({})
       .lean()
       .then((restaurantList)=>{
-        console.log(keywords)
         const restaurants = restaurantList.filter(data => {
         return data.name.toLowerCase().includes(keywords) //|| data.category.includes(keyword)
         })
