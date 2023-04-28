@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express() //試試看跟上面統一
 const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json')
+const Restaurants = require('./models/restaurant')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
@@ -30,25 +30,38 @@ app.use(express.static('public'))
 //handle request and response here
 //index page
 app.get('/', (req, res) => {
-    res.render('index', {restaurants: restaurantList.results})
+    Restaurants.find()
+      .lean()
+      .then((restaurant) => {res.render('index',{restaurant})})
+      .catch(error => console.error(error))
 })
 
 //show pages
-app.get('/restaurants/:restaurant_id', (req, res) => {
-    const restaurant = restaurantList.results.find(
-        theRestaurant => theRestaurant.id.toString() === req.params.restaurant_id
-    )
-    res.render('show', {restaurant: restaurant})
+app.get('/restaurants/:id', (req, res) => {
+    const id = req.params.id
+    return Restaurants.findById(id)
+      .lean()
+      .then((restaurant) => {res.render('show', {restaurant})})
+      .catch(error => console.error(error))
 })
 
 //search function
 app.get('/search', (req, res) => {
-    const keyword = req.query.keyword
-    const restaurants = restaurantList.results.filter(restaurant => {
-      return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-    })
-    res.render('index', { restaurants: restaurants, keyword: keyword })
-  })
+    Restaurants.find({})
+      .lean()
+      .then((restaurantList)=>{
+        const keyword = req.query.keyword.trim().toLowerCase()
+        const restaurants = restaurantList.filter(restaurant => {
+        restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword.toLowerCase())
+        })
+        res.render('index', { restaurants: restaurants, keyword: keyword })
+      })
+      .catch(error => console.error(error))
+    // const restaurants = restaurantList.results.filter(restaurant => {
+    //   return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+    // })
+    //res.render('index', { restaurants: restaurants, keyword: keyword })
+})
   
 
 //start and listen on the Express server
