@@ -1,4 +1,4 @@
-<form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
     <input class="mb-3 form-control" type="text" placeholder="name" name="name" value="{{restaurant.name}}" required>
     <input class="mb-3 form-control"  type="text" placeholder="english name" name="name_en" value="{{restaurant.name_en}}" required>
     <input class="mb-3 form-control"  type="text" placeholder="category" name="category" value="{{restaurant.category}}" required>

@@ -1,20 +1,32 @@
 
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-      <div class="search-bar-inner">
-      <form action="/search">
-          <h4 class="mb-2">尋找餐廳：</h4>
-          <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" value={{keyword}}>
-          <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-          </div>
-          </div>
-      </form>
+<div class="container d-inline-flex justify-content-between">
+  <div class="container search-bar d-inline-flex justify-content-between">
+    <div class="search-bar-outer">
+      <div class="search-bar-inner ">
+        <form action="/search">
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" value={{keyword}}>
+            <div class="input-group-append">
+                <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            </div>
+        </form>
       </div>
+    </div>
   </div>
+
+    <div class="input-group">
+      <select class="form-select" id="sort" name="sort">
+        <option value="0" type="submit">A > Z</option>
+        <option value="1" type="submit">Z > A</option>
+        <option value="2" type="submit">類別</option>
+        <option value="3" type="submit">地區</option>
+      </select>
+    </div>
 </div>
+
 
 
 <!-- restaurant list -->
@@ -45,7 +57,7 @@
             <div class="container mb-5 d-flex justify-content-end">
               <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-link btn-sm">Edit</button></a>
               <a href="/restaurants/{{this._id}}"><button class="btn btn-link btn-sm">Details</button></a>
-              <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
+              <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST" style="display: inline;">
                 <button type="submit" class="btn btn-outline-dark btn-sm">Delete</button>
               </form>
             </div>
