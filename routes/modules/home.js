@@ -3,11 +3,12 @@ const router = express.Router()
 const Restaurants = require('../../models/restaurant')
 
 router.get('/', (req, res) => {
-    Restaurants.find()
-      .lean()
-      .sort({name: 'asc'}) //or desc
-      .then((restaurant) => {res.render('index',{restaurant})})
-      .catch(error => console.error(error))
-})
+  const userId = req.user._id   // 變數設定
+  Restaurants.find({ userId })         // 加入查詢條件
+    .lean()
+    .sort({name: 'asc'}) 
+    .then((restaurant) => {res.render('index',{restaurant})})
+    .catch(error => console.error(error))
+  })
 
 module.exports = router
