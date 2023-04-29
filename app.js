@@ -6,7 +6,7 @@ const Restaurants = require('./models/restaurant')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
-//const usePassport = require('./config/passport')
+const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 
 const routes = require('./routes')//express自動找index.js
@@ -24,6 +24,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended:true }))
 app.use(methodOverride('_method'))
 app.use(session({secret: process.env.SESSION_SECRET, resave: false, saveUninstalize: true}))
+usePassport(app)
 
 //routes
 app.use(routes)
