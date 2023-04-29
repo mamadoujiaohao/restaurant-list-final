@@ -1,7 +1,8 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const User = require('../models/user') 
 
-module.export = app => {
+module.exports = app => {
     app.use(passport.initialize())
     app.use(passport.session())
 
@@ -29,4 +30,4 @@ module.export = app => {
             .then(user => done(null, user))
             .catch(err => done(err, null))
     })
-    }
+}
