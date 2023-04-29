@@ -23,6 +23,7 @@ const port = process.env.PORT
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended:true }))
 app.use(methodOverride('_method'))
+app.use(session({secret: process.env.SESSION_SECRET, resave: false, saveUninstalize: true}))
 
 //routes
 app.use(routes)
