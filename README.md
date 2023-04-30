@@ -5,9 +5,9 @@
 <h3>在您註冊帳號以後,可以新增餐廳到您的List內</h3>
 <h3>上方的搜尋欄可快速搜尋您的餐廳</h3>
 
-<h2>Environment SetUp - 環境建置<h2>
-Runtime : Node.js
-Framework : Express@4.16.4
-Template Engine : Express-handlebars@3.0.0
-Database : MongoDB@5.3.0 + mongoose@7.1.0
+<h2>Environment SetUp - 環境建置</h2>
+<p>Runtime : Node.js</p>
+<p>Framework : Express@4.16.4</p>
+<p>Template Engine : Express-handlebars@3.0.0</p>
+<p>Database : MongoDB@5.3.0 + mongoose@7.1.0</p>
 
