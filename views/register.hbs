@@ -2,6 +2,31 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
+
+      {{#if success_msg}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{{success_msg}}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          </button>
+        </div>
+      {{/if}}
+      {{#if warning_msg}}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{{warning_msg}}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          </button>
+        </div>
+      {{/if}}
+      {{#if errors}}
+        {{#each errors}}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ this.message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+          </div>
+        {{/each}}
+      {{/if}}
+      
       <form action="/users/register" method="POST">
         <div class="mb-3">
           <label for="name" class="mb-2">Name</label>

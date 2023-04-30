@@ -2,10 +2,10 @@
     <input class="mb-3 form-control" type="text" placeholder="name" name="name" required>
     <input class="mb-3 form-control"  type="text" placeholder="english name" name="name_en" required>
     <input class="mb-3 form-control"  type="text" placeholder="category" name="category" required>
-    <input class="mb-3 form-control"  type="url" placeholder="img href" name="image" required>
+    <input class="mb-3 form-control"  type="url" placeholder="img href" name="image" pattern="^https?:\/\/.+\.(jpe?g|png|gif)$" required>
     <input class="mb-3 form-control"  type="text" placeholder="location" name="location" required>
     <input class="mb-3 form-control"  type="text" placeholder="phone" name="phone" required>
-    <input class="mb-3 form-control"  type="url" placeholder="google_map" name="google_map" required>
+    <input class="mb-3 form-control"  type="url" placeholder="google_map" name="google_map" pattern="^https?:\/\/.+\.(jpe?g|png|gif)$" required>
     <input class="mb-3 form-control"  type="number" min="0" max="5" placeholder="rating" name="rating" required>
     <input class="mb-3 form-control"  type="text" placeholder="description" name="description" required>
     <button class="mb-3"  type="submit" class="btn btn-primary">送出</button>
